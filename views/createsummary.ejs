@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Summary - CogniBrief</title>
+    <style>
+        /* GenerateSummary.css */
+
+        body {
+            background: linear-gradient(to bottom, #0f0c29, #03c6d0);
+            margin: 0;
+            padding: 0;
+            color: #fff; /* Text color */
+            font-family: "Roboto", sans-serif;
+        }
+        .navbar {
+  background-color: #03c6d0;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-left {
+  margin: 0;
+}
+
+.navbar-right {
+  margin: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.6rem;
+  padding: 0.5rem 1rem;
+}
+
+.navbar a:hover {
+  background-color: #da9595;
+  border-radius: 4px;
+}
+
+
+        /* .container {
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .header {
+            text-align: left;
+            padding: 1rem;
+        } */
+
+        .wrapper {
+            max-width: 75%;
+            margin: auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* h1 {
+            margin-bottom: 1.5rem;
+            font-size: 2.3rem;
+        } */
+
+        .buttons {
+            margin-bottom: 1.5rem;
+        }
+
+        button {
+            background-color: #0074cc;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.5rem;
+            margin-right: 10px; /* Adjust margin between buttons */
+        }
+
+        button:hover {
+            background-color: #005a9e;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+            text-align: left;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 0.5rem;
+            box-sizing: border-box;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            font-size: 1.2rem;
+        }
+
+        .summary-buttons {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* Style for the "Generate Summary" button */
+        #generateButton,
+        #saveButton,
+        #reviewButton {
+            background-color: #002a4a;
+
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        #generateButton:hover,
+        #saveButton:hover,
+        #reviewButton:hover {
+            background-color: #005a9e;
+        }
+
+        .privacy-text {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <nav class="navbar">
+        <div class="navbar-left">
+          <h1 class="logo"><a href="http://localhost:3000/">CogniBrief</a></h1>
+        </div>
+        <div class="navbar-right">
+          <h1 class="dashboard"><a href="http://localhost:3000/dashboard">Dashboard</a></h1>
+        </div>
+      </nav>
+    <div class="wrapper">
+        <h1>Generate Summary</h1>
+        <div class="buttons">
+            <button id="videoButton" onclick="submitForm('video')">Video</button>
+            <button id="textButton" onclick="submitForm('text')">Text</button>
+            <button id="audioButton" onclick="submitForm('audio')">Audio</button> <!-- Added audio button -->
+        </div>
+        <form id="videoForm" method="post" action="/process_video" style="display: none;">
+            <label for="video_link">Enter YouTube Video URL:</label>
+            <input type="text" id="video_link" name="video_link" required/>
+            <button type="submit" id="generateVideoButton">Generate Summary</button>
+            <button type="submit" id="save">Save</button>
+        </form>
+        <form id="textForm" method="post" action="/process_text" style="display: none;">
+            <label for="url">Enter URL:</label>
+            <input type="text" id="url" name="url" required/>
+            <button type="submit" id="generateTextButton">Generate Summary</button>
+            <button type="submit" id="save">Save</button>
+        </form>
+        <form id="audioForm" method="post" action="/process_audio" enctype="multipart/form-data" style="display: none;"> <!-- Added form for audio -->
+            <label for="audio_file">Upload Audio File:</label>
+            <input type="file" id="audio_file" name="audio_file" accept=".wav" required/>
+            <button type="submit" id="generateAudioButton">Generate Summary</button>
+            <button type="submit" id="save">Save</button>
+        </form>
+        <label for="summary">Summary:</label>
+        <textarea id="summary" name="summary" rows="9" readonly></textarea>
+    </div>
+        
+    </div>
+    <p></p>
+    <center>
+        <div class="privacy-text">
+            By accessing and utilizing this website, you are acknowledging and consenting to our privacy and data usage policies.
+        </div>
+        <p></p>
+    </center>
+</div>
+
+<script>
+    function submitForm(type) {
+        if (type === 'video') {
+            document.getElementById('videoForm').style.display = 'block';
+            document.getElementById('textForm').style.display = 'none';
+            document.getElementById('audioForm').style.display = 'none'; // Hide audio form
+        } else if (type === 'text') {
+            document.getElementById('textForm').style.display = 'block';
+            document.getElementById('videoForm').style.display = 'none';
+            document.getElementById('audioForm').style.display = 'none'; // Hide audio form
+        } else if (type === 'audio') { // Show audio form
+            document.getElementById('audioForm').style.display = 'block';
+            document.getElementById('videoForm').style.display = 'none';
+            document.getElementById('textForm').style.display = 'none';
+        }
+    }
+
+    document.getElementById('videoForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        var videoLink = document.getElementById('video_link').value;
+        fetch('/process_video', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({video_link: videoLink})
+        })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('summary').value = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+
+    document.getElementById('textForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        var url = document.getElementById('url').value;
+        fetch('/process_text', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({url: url})
+        })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('summary').value = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+
+    document.getElementById('audioForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        var formData = new FormData();
+        formData.append('audio_file', document.getElementById('audio_file').files[0]);
+        fetch('/process_audio', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('summary').value = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+</body>
+</html>

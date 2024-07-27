@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>View Summary - CogniBrief</title>
+ 
+<style>
+/* Viewsummary.css */
+
+body {
+  background: linear-gradient(to bottom, #0f0c29, #03c6d0);
+  margin: 0;
+  padding: 0;
+  color: #fff; /* Text color */
+  font-family: "Roboto", sans-serif;
+  height:100%;
+}
+nav {
+    background-color: #03c6d0;
+    padding: 15px;
+    display: flex;
+}
+
+.cognibrief-nav {
+    margin-right: auto;
+}
+
+.cognibrief-nav a {
+    color: #000;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.dashboard-nav a {
+    color:#000;
+    text-decoration: none;
+    padding: 10px;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+.dashboard-nav a:hover {
+    background-color: #da9595;
+}
+.cognibrief-nav a:hover {
+    background-color: #da9595;
+}
+
+
+.container {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.header {
+  text-align: left;
+  padding: 1rem;
+}
+
+.wrapper {
+  max-width: 75%;
+  margin: auto;
+  padding: 2rem;
+}
+
+h1 {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display:inline-block; /* Display label and input in the same line */
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+
+input,
+textarea,
+button {
+  display: block;
+  margin-bottom: 1rem;
+  width: 100%;
+  padding: 0.5rem; /* Adjust padding for input and textarea */
+  box-sizing: border-box; /* Include padding in the width */
+}
+
+textarea {
+  height: 150px; /* Adjust the height of the textarea */
+}
+
+button {
+  background-color: #002a4a;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  border: none;
+
+  border-radius: 4px;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+button:hover {
+  background-color: #005a9e;
+}
+.privacy-text {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    color: red;
+  }
+
+
+    .label-with-textbox {
+        display: flex;
+        align-items: center;
+    }
+    .textbox {
+        margin-right: 10px;
+height:10px;
+        width: 100px; /* Adjust width as needed */
+    }
+    .label-text {
+        font-size: 16px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<nav>
+        <div class="cognibrief-nav">
+            <a href="/home">CogniBrief</a>
+        </div>
+        <div class="dashboard-nav">
+	    <a href="/dashboard">Dashboard</a>
+            <a href="/viewblog"> View Blog</a>
+            <a href="/createblog">Create Blog</a>
+        </div>
+    </nav>
+  <div class="container">
+    <div class="wrapper">
+      <h1><u>Here are your saved summaries:</u></h1><br><br>
+      
+      <form action="/viewsummary" method="post">
+        <div class="label-with-textbox">
+            <label class="label-text" for="type">Type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label>
+            <input type="text" id="type" name="type" class="textbox" >
+        </div>
+        
+        <div class="label-with-textbox">
+            <label class="label-text" for="name">Name:&nbsp;&nbsp;&nbsp;&nbsp; </label>
+            <input type="text" id="name" name="name" class="textbox" >
+        </div>
+
+        <div class="label-with-textbox">
+            <label class="label-text" for="content">Content:  </label>
+            <textarea id="content" name="content" rows="8"></textarea>
+        </div>
+        
+        <button type="submit">Submit</button>
+      </form>
+      
+    </div>
+  </div>
+
+</body>
+</html>

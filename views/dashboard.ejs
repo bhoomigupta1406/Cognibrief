@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CogniBrief Dashboard</title>
+    <!-- <link rel="stylesheet" href="dashboard.css"> -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('dashboard1.jpg') no-repeat center center fixed; /* Add background image */
+            background-size: cover; /* Ensure the background image covers the entire viewport */
+        }
+        
+        nav {
+            position: fixed; /* Position navigation bar at the top */
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #03c6d0;
+            padding: 15px 30px;
+            display: flex;
+            z-index: 1000; /* Ensure navigation bar stays above other content */
+        }
+        
+        .cognibrief-nav {
+            margin-right: auto;
+        }
+        
+        .cognibrief-nav a {
+            color: #000;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .cognibrief-nav a:hover {
+            background-color: #da9595;
+        }
+        
+        .dashboard-nav a {
+            color: #000;
+            text-decoration: none;
+            padding: 10px;
+            margin: 0 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .dashboard-nav a:hover {
+            background-color: #da9595;
+        }
+        
+        .content {
+            text-align: left; /* Center the content */
+            padding-top: 100px; /* Add space for the navigation bar */
+            padding-left: 10px;
+            color: antiquewhite;
+            font-size: 25px;
+        }
+        
+        .welcome {
+            margin-top: 1px;
+        }
+        
+        .welcome h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .welcome p {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Center buttons horizontally */
+        }
+        
+        .button {
+            text-decoration: none;
+            color: #fff;
+            background-color: #31acc4;
+            padding: 12px 20px;
+            margin: 10px 0;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            transition: background-color 0.3s, border-color 0.3s;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        
+        .button:hover {
+            background-color: #2084a8;
+        }
+        
+        .button:focus {
+            outline: none;
+        }
+        
+        .button:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="cognibrief-nav">
+            <a href="/home">CogniBrief</a>
+        </div>
+        <div class="dashboard-nav">
+        
+            <a href="/createsummary">Generate Summary</a>
+            <a href="/viewsummary">View Saved Summaries</a>
+            <button class="logout-btn">Logout</button>
+        </div>
+    </nav>
+    <script src="./logout.ejs"></script>
+    <div class="content">
+        <div class="welcome">
+            <h1>Welcome Users !!</h1>
+            <p>Harness the power of AI to summarize audio, video, 
+                <br>and text.</p>
+            <div class="buttons">
+                <a href="/createsummary" class="button">Generate Summary</a>
+                <a href="/viewsummary" class="button">View Saved Summaries</a>
+               
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

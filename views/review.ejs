@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, 
+				initial-scale=1.0">
+	<!-- <link rel="stylesheet" href="rev.css"> -->
+	<title>The Product Review and Rating</title>
+
+
+<style>
+
+.navbar {
+    background-color: #03c6d0;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999; /* Ensures the navbar appears above other content */
+}
+
+.navbar a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.6rem;
+    padding: 0.5rem 1rem;
+}
+
+.navbar a:hover {
+    background-color: #da9595;
+    border-radius: 4px;
+}
+.navbar-right {
+    margin-left: auto; /* This pushes the "Dashboard" link to the rightmost corner */
+}
+    
+  body 
+  {
+	font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #0f0c29, #03c6d0, #3df6f9);
+	
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+}
+
+
+.container {
+	background-color: white;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	text-align: center;
+	width: 400px;
+}
+
+h1 {
+	font-size: 24px;
+	margin: 0;
+}
+
+.rating {
+	font-size: 20px;
+	margin: 10px 0;
+}
+
+.stars {
+	font-size: 30px;
+	margin: 10px 0;
+}
+
+.star {
+	cursor: pointer;
+	margin: 0 5px;
+}
+
+.one {
+	color: rgb(255, 0, 0);
+}
+
+.two {
+	color: rgb(255, 106, 0);
+}
+
+.three {
+	color: rgb(251, 255, 120);
+}
+
+.four {
+	color: rgb(255, 255, 0);
+}
+
+.five {
+	color: rgb(24, 159, 14);
+}
+
+textarea {
+	width: 90%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+button {
+	background-color: #007BFF;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #0056b3;
+}
+
+.reviews {
+	margin-top: 20px;
+	text-align: left;
+}
+
+.review {
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 10px;
+	margin: 10px 0;
+}
+
+.review p {
+	margin: 0;
+}
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <h1 class="logo"><a href="/home">CogniBrief</a></h1>
+        </div>
+        <div class="navbar-right">
+            <h1 class="dashboard"><a href="/dashboard">Dashboard</a></h1>
+        </div>
+    </nav>
+	<div class="container">
+		<h1>Leave a Review</h1>
+		<div class="rating">
+			<span id="rating">0</span>/5
+		</div>
+		<div class="stars" id="stars">
+			<span class="star" data-value="1">★</span>
+			<span class="star" data-value="2">★</span>
+			<span class="star" data-value="3">★</span>
+			<span class="star" data-value="4">★</span>
+			<span class="star" data-value="5">★</span>
+		</div>
+		<p>Share your review:</p>
+		<textarea id="review"
+				placeholder="Write your review here">
+		</textarea>
+		<button id="submit">Submit</button>
+		<div class="reviews" id="reviews">
+		</div>
+	</div>
+	<!-- <script src="rev.js"></script> -->
+    <script>
+        const stars = document.querySelectorAll(".star");
+const rating = document.getElementById("rating");
+const reviewText = document.getElementById("review");
+const submitBtn = document.getElementById("submit");
+const reviewsContainer = document.getElementById("reviews");
+
+stars.forEach((star) => {
+	star.addEventListener("click", () => {
+		const value = parseInt(star.getAttribute("data-value"));
+		rating.innerText = value;
+
+		// Remove all existing classes from stars
+		stars.forEach((s) => s.classList.remove("one", 
+												"two", 
+												"three", 
+												"four", 
+												"five"));
+
+		// Add the appropriate class to 
+		// each star based on the selected star's value
+		stars.forEach((s, index) => {
+			if (index < value) {
+				s.classList.add(getStarColorClass(value));
+			}
+		});
+
+		// Remove "selected" class from all stars
+		stars.forEach((s) => s.classList.remove("selected"));
+		// Add "selected" class to the clicked star
+		star.classList.add("selected");
+	});
+});
+
+submitBtn.addEventListener("click", () => {
+	const review = reviewText.value;
+	const userRating = parseInt(rating.innerText);
+
+	if (!userRating || !review) {
+		alert(
+"Please select a rating and provide a review before submitting."
+			);
+		return;
+	}
+
+	if (userRating > 0) {
+		const reviewElement = document.createElement("div");
+		reviewElement.classList.add("review");
+		reviewElement.innerHTML = 
+`<p><strong>Rating: ${userRating}/5</strong></p><p>${review}</p>`;
+		reviewsContainer.appendChild(reviewElement);
+
+		// Reset styles after submitting
+		reviewText.value = "";
+		rating.innerText = "0";
+		stars.forEach((s) => s.classList.remove("one", 
+												"two", 
+												"three", 
+												"four", 
+												"five", 
+												"selected"));
+	}
+});
+
+function getStarColorClass(value) {
+	switch (value) {
+		case 1:
+			return "one";
+		case 2:
+			return "two";
+		case 3:
+			return "three";
+		case 4:
+			return "four";
+		case 5:
+			return "five";
+		default:
+			return "";
+	}
+}
+
+    </script>
+</body>
+
+</html>

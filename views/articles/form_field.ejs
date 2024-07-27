@@ -1,0 +1,15 @@
+<div class="form-group">
+    <label for="username" style="font-size: 25px;">Username</label>
+    <input required value="<%=article.username%>" type="text" name="username" class="form-control">
+</div><br><br>
+<div class="form-group">
+    <label for="title" style="font-size: 25px;">Title</label>
+    <textarea name="title" id="title" class="form-control"><%=article.title%></textarea>
+</div><br><br>
+<div class="form-group">
+    <label for="content" style="font-size: 25px;">Content</label>
+    <textarea required name="content" id="content" class="form-control" rows="8"><%=article.content%></textarea>
+</div><br>
+<br>
+<a href="/" class="btn btn-secondary" style="font-size: 25px;">Cancel</a>
+<button type="submit" class="btn btn-primary" style="font-size: 25px;">Save</button>

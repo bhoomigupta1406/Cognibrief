@@ -1,0 +1,148 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CogniBrief - Review Page</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" />
+  <style>
+    /* Review.css */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom, #0f0c29, #03c6d0, #3df6f9);
+  margin: 0; /* Remove default body margin */
+  padding: 0; /* Remove default body padding */
+}
+
+.navbar {
+  background-color: #03c6d0;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-left {
+  margin: 0;
+}
+
+.navbar-right {
+  margin: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.6rem;
+  padding: 0.5rem 1rem;
+}
+
+.navbar a:hover {
+  background-color: #da9595;
+  border-radius: 4px;
+}
+
+.wrapper {
+  max-width: 50%;
+  margin: auto;
+  background-color: #f1f7f5;
+  padding: 4rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.heading {
+  color: #070707;
+  margin: 1.5rem 0;
+  text-align: center;
+  letter-spacing: 2px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+label {
+  display: block;
+  margin: 1.5rem 0;
+  font-weight: bold;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #03c6d0;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #01909a;
+}
+
+
+label,
+input,
+textarea,
+.star-ratings {
+  font-size: 1.2em; /* Adjust the font size as needed */
+}
+
+button {
+  font-size: 1.2em; /* Adjust the font size as needed */
+}
+
+  </style>
+  <!-- <link rel="stylesheet" href="Review.css" /> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <div class="navbar-left">
+        <h1 class="logo"><a href="/home">CogniBrief</a></h1>
+      </div>
+      <div class="navbar-right">
+        <h1 class="dashboard"><a href="/dashboard">Dashboard</a></h1>
+      </div>
+    </nav>
+  </div>
+<br><br>
+  <div class="wrapper">
+    <h1 class="heading">Leave a Review</h1>
+
+    <form action="/review" method="post">
+
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required />
+
+      <label for="comment">Comment:</label>
+      <textarea id="comment" name="comment" rows="4" required></textarea>
+      <div style="text-align: center;">
+      <button type="submit" style="margin-top: 10px;">Submit</button>
+    </div>
+
+    </form>
+  </div>
+
+  
